@@ -52,7 +52,6 @@
 							{
 								"type": "slack",
 								"send_notification": true,
-								"to": null,
 								"message": "Test message"
 							}
 						],
@@ -63,7 +62,6 @@
 							{
 								"type": "slack",
 								"send_notification": true,
-								"to": null,
 								"message": "Segment Failure"
 							}
 						],
@@ -74,7 +72,6 @@
 							{
 								"type": "slack",
 								"send_notification": true,
-								"to": null,
 								"message": "Segment Aborted"
 							}
 						],
@@ -93,30 +90,21 @@
 					"update_watch_time": "",
 					"serial": false
 				},
-				"application_init": {
-					"command": "",
-					"arguments": null
-				},
+				"application_init": {},
 				"packages": [
 					{
 						"name": "((application.name))",
-						"dependencies": [],
 						"downloads": [],
 						"files": [
 							"((application.name))*"
-						],
-						"package_install_command": "",
-						"installed_path": ""
+						]
 					},
 					{
 						"name": "hello-test",
-						"dependencies": [],
 						"downloads": [],
 						"files": [
 							"hello-world-dotnet.zip"
-						],
-						"package_install_command": "",
-						"installed_path": ""
+						]
 					}
 				],
 				"instance_tags": [
@@ -212,7 +200,6 @@
 							}
 						],
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						},
 						"delete_instances": true
@@ -222,12 +209,10 @@
 							{
 								"type": "slack",
 								"send_notification": true,
-								"to": null,
 								"message": "Test message"
 							}
 						],
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						},
 						"delete_instances": false
@@ -237,12 +222,10 @@
 							{
 								"type": "slack",
 								"send_notification": true,
-								"to": null,
 								"message": "Segment Failure"
 							}
 						],
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						},
 						"delete_instances": false
@@ -252,12 +235,10 @@
 							{
 								"type": "slack",
 								"send_notification": true,
-								"to": null,
 								"message": "Segment Aborted"
 							}
 						],
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						}
 					}
@@ -275,10 +256,7 @@
 					"update_watch_time": "120000-300000",
 					"serial": false
 				},
-				"application_init": {
-					"command": "",
-					"arguments": []
-				},
+				"application_init": {},
 				"package_dependencies": [
 					"((application.name))",
 					"hello-test"
@@ -293,14 +271,16 @@
 					{
 						"name": "((application.name))",
 						"number_of_instances": 1,
-						"persistent_disk_type": "",
+						"cloud_provider_type": "aws",
 						"cloud_provider_name": "guide-rails-aws-us-west-2",
 						"vm_type": "default",
 						"os_type": "windows2012R2",
 						"networks": [
 							"isolation"
 						],
-						"availability_zones": null,
+						"availability_zones": [
+							"default"
+						],
 						"deployment_strategy": {},
 						"dependencies": [
 							{
@@ -340,7 +320,8 @@
 						"UnhealthyThresholdCount": 0
 					}
 				},
-				"cache_info": {}
+				"cache_info": {},
+				"deployment_target": 1
 			}
 		],
 		"exit_actions": {
@@ -367,12 +348,10 @@
 					{
 						"type": "slack",
 						"send_notification": true,
-						"to": null,
 						"message": "Test message"
 					}
 				],
 				"code_analysis": {
-					"publish": false,
 					"properties": null
 				},
 				"delete_instances": false
@@ -382,12 +361,10 @@
 					{
 						"type": "slack",
 						"send_notification": true,
-						"to": null,
 						"message": "Segment Failure"
 					}
 				],
 				"code_analysis": {
-					"publish": false,
 					"properties": null
 				},
 				"delete_instances": false
@@ -397,12 +374,10 @@
 					{
 						"type": "slack",
 						"send_notification": true,
-						"to": null,
 						"message": "Segment Aborted"
 					}
 				],
 				"code_analysis": {
-					"publish": false,
 					"properties": null
 				}
 			}
@@ -424,10 +399,7 @@
 				"target_path": "ci/isolation_tests.ps1"
 			}
 		],
-		"application_init": {
-			"command": "",
-			"arguments": null
-		},
+		"application_init": {},
 		"process": {
 			"init": {
 				"command": "ci/deploy.ps1"
@@ -563,7 +535,6 @@
 			{
 				"name": "email",
 				"provider": "email",
-				"URL": "",
 				"properties": [
 					{
 						"name": "gr_email_host",
@@ -588,23 +559,9 @@
 				]
 			}
 		],
-		"vault": {
-			"address": ""
-		},
-		"concourse": {
-			"address": "",
-			"team": "",
-			"username": "",
-			"password": "",
-			"fly_target_path": ""
-		},
-		"mq": {
-			"host": "",
-			"user": "",
-			"password": ""
-		},
-		"bosh": {
-			"director": ""
-		}
+		"vault": {},
+		"concourse": {},
+		"mq": {},
+		"bosh": {}
 	}
 }
