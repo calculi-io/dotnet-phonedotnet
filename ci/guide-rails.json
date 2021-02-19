@@ -31,51 +31,12 @@
 				"exit_actions": {
 					"default": {
 						"fetch_logs": true,
-						"notifications": [
-							{
-								"type": "slack",
-								"send_notification": true,
-								"to": [
-									"#gr-pipeline"
-								],
-								"message": "Segment Status"
-							}
-						],
+						"notifications": [],
 						"code_analysis": {
 							"publish": true,
 							"properties": null
 						},
 						"delete_instances": true
-					},
-					"on_success": {
-						"notifications": [
-							{
-								"type": "slack",
-								"send_notification": true,
-								"message": "Test message"
-							}
-						],
-						"code_analysis": null
-					},
-					"on_failure": {
-						"notifications": [
-							{
-								"type": "slack",
-								"send_notification": true,
-								"message": "Segment Failure"
-							}
-						],
-						"code_analysis": null
-					},
-					"on_abort": {
-						"notifications": [
-							{
-								"type": "slack",
-								"send_notification": true,
-								"message": "Segment Aborted"
-							}
-						],
-						"code_analysis": null
 					}
 				},
 				"properties": [
@@ -189,58 +150,11 @@
 				"exit_actions": {
 					"default": {
 						"fetch_logs": true,
-						"notifications": [
-							{
-								"type": "slack",
-								"send_notification": true,
-								"to": [
-									"#gr-pipeline"
-								],
-								"message": "Segment Status"
-							}
-						],
+						"notifications": [],
 						"code_analysis": {
 							"properties": null
 						},
 						"delete_instances": true
-					},
-					"on_success": {
-						"notifications": [
-							{
-								"type": "slack",
-								"send_notification": true,
-								"message": "Test message"
-							}
-						],
-						"code_analysis": {
-							"properties": null
-						},
-						"delete_instances": false
-					},
-					"on_failure": {
-						"notifications": [
-							{
-								"type": "slack",
-								"send_notification": true,
-								"message": "Segment Failure"
-							}
-						],
-						"code_analysis": {
-							"properties": null
-						},
-						"delete_instances": false
-					},
-					"on_abort": {
-						"notifications": [
-							{
-								"type": "slack",
-								"send_notification": true,
-								"message": "Segment Aborted"
-							}
-						],
-						"code_analysis": {
-							"properties": null
-						}
 					}
 				},
 				"deployment_files": [
@@ -327,59 +241,12 @@
 		"exit_actions": {
 			"default": {
 				"fetch_logs": true,
-				"notifications": [
-					{
-						"type": "slack",
-						"send_notification": true,
-						"to": [
-							"#gr-pipeline"
-						],
-						"message": "Segment Status"
-					}
-				],
+				"notifications": [],
 				"code_analysis": {
 					"publish": true,
 					"properties": null
 				},
 				"delete_instances": false
-			},
-			"on_success": {
-				"notifications": [
-					{
-						"type": "slack",
-						"send_notification": true,
-						"message": "Test message"
-					}
-				],
-				"code_analysis": {
-					"properties": null
-				},
-				"delete_instances": false
-			},
-			"on_failure": {
-				"notifications": [
-					{
-						"type": "slack",
-						"send_notification": true,
-						"message": "Segment Failure"
-					}
-				],
-				"code_analysis": {
-					"properties": null
-				},
-				"delete_instances": false
-			},
-			"on_abort": {
-				"notifications": [
-					{
-						"type": "slack",
-						"send_notification": true,
-						"message": "Segment Aborted"
-					}
-				],
-				"code_analysis": {
-					"properties": null
-				}
 			}
 		},
 		"default_properties": [
@@ -422,146 +289,5 @@
 	},
 	"organization": {
 		"orgname": "Onboarding-Demo"
-	},
-	"infrastructure": {
-		"stemcells": null,
-		"resources": [
-			{
-				"name": "pipeline",
-				"image": {
-					"name": "docker-registry.service.consul:443/pipeline-image-cli-test",
-					"version": "latest",
-					"location": "docker-registry.service.consul:443"
-				}
-			},
-			{
-				"name": "email",
-				"image": {
-					"name": "docker-registry.service.consul:443/gr-email-resource",
-					"version": "latest",
-					"location": "docker-registry.service.consul:443"
-				}
-			},
-			{
-				"name": "deployment",
-				"image": {
-					"name": "docker-registry.service.consul:443/pipeline-image-cli-test",
-					"version": "latest",
-					"location": "docker-registry.service.consul:443"
-				}
-			},
-			{
-				"name": "idgenerator",
-				"image": {
-					"name": "docker-registry.service.consul:443/gr-id-generator",
-					"version": "latest",
-					"location": "docker-registry.service.consul:443"
-				}
-			},
-			{
-				"name": "emitter",
-				"image": {
-					"name": "docker-registry.service.consul:443/guide-rails-emitter",
-					"version": "latest",
-					"location": "docker-registry.service.consul:443"
-				}
-			},
-			{
-				"name": "git-resource",
-				"image": {
-					"name": "docker-registry.service.consul:443/gr-git-resource",
-					"version": "latest",
-					"location": "docker-registry.service.consul:443"
-				}
-			},
-			{
-				"name": "build-breaker",
-				"image": {
-					"name": "docker-registry.service.consul:443/gr-build-breaker",
-					"version": "latest",
-					"location": "docker-registry.service.consul:443"
-				}
-			},
-			{
-				"name": "s3",
-				"image": {
-					"name": "docker-registry.service.consul:443/concourse-s3-resource",
-					"version": "latest",
-					"location": "docker-registry.service.consul:443"
-				}
-			},
-			{
-				"name": "slack",
-				"image": {
-					"name": "docker-registry.service.consul:443/concourse-slack-resource",
-					"version": "latest",
-					"location": "docker-registry.service.consul:443"
-				}
-			},
-			{
-				"name": "sonar",
-				"image": {
-					"name": "docker-registry.service.consul:443/concourse-sonarqube-resource",
-					"version": "latest",
-					"location": "docker-registry.service.consul:443"
-				}
-			},
-			{
-				"name": "time",
-				"image": {
-					"name": "docker-registry.service.consul:443/gr-time-resource",
-					"version": "latest",
-					"location": "docker-registry.service.consul:443"
-				}
-			},
-			{
-				"name": "azure-blobstore",
-				"image": {
-					"name": "docker-registry.service.consul:443/concourse-azure-blobstore-resource",
-					"version": "latest",
-					"location": "docker-registry.service.consul:443"
-				}
-			},
-			{
-				"name": "gr-gcs-resource",
-				"image": {
-					"name": "docker-registry.service.consul:443/gr-gcs-resource",
-					"version": "latest",
-					"location": "docker-registry.service.consul:443"
-				}
-			}
-		],
-		"notification_configurations": [
-			{
-				"name": "email",
-				"provider": "email",
-				"properties": [
-					{
-						"name": "gr_email_host",
-						"value": "((gr_email_host))"
-					},
-					{
-						"name": "gr_email_port",
-						"value": "((gr_email_port))"
-					},
-					{
-						"name": "gr_email_from",
-						"value": "((gr_email_from))"
-					},
-					{
-						"name": "gr_email_username",
-						"value": "((gr_email_username))"
-					},
-					{
-						"name": "gr_email_password",
-						"value": "((gr_email_password))"
-					}
-				]
-			}
-		],
-		"vault": {},
-		"concourse": {},
-		"mq": {},
-		"bosh": {}
 	}
 }
