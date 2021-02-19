@@ -31,7 +31,6 @@
 				"exit_actions": {
 					"default": {
 						"fetch_logs": true,
-						"notifications": [],
 						"code_analysis": {
 							"publish": true,
 							"properties": null
@@ -150,7 +149,6 @@
 				"exit_actions": {
 					"default": {
 						"fetch_logs": true,
-						"notifications": [],
 						"code_analysis": {
 							"properties": null
 						},
@@ -198,11 +196,6 @@
 						"deployment_strategy": {},
 						"dependencies": [
 							{
-								"name": "enable_ssh",
-								"release": "windows-utilities",
-								"properties": []
-							},
-							{
 								"name": "bosh-dns-windows",
 								"release": "bosh-dns-windows",
 								"properties": [
@@ -241,7 +234,6 @@
 		"exit_actions": {
 			"default": {
 				"fetch_logs": true,
-				"notifications": [],
 				"code_analysis": {
 					"publish": true,
 					"properties": null
@@ -273,10 +265,6 @@
 			}
 		},
 		"releases": [
-			{
-				"name": "windows-utilities",
-				"version": "latest"
-			},
 			{
 				"name": "bosh-dns-windows",
 				"version": "latest"
