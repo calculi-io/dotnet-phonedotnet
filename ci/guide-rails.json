@@ -1,0 +1,610 @@
+{
+	"metadata": {
+		"version": 2
+	},
+	"application": {
+		"name": "hello-world-dotnet",
+		"language": "DOTNET",
+		"artifact_store": {
+			"type": "s3",
+			"repositories": [
+				{
+					"category": "rc-packaging",
+					"bucket": "guide-rails-calculi-rc"
+				},
+				{
+					"category": "final-packaging",
+					"bucket": "guide-rails-calculi-final"
+				},
+				{
+					"category": "logs",
+					"bucket": "guide-rails-calculi-logs"
+				}
+			]
+		}
+	},
+	"pipeline": {
+		"segments": [
+			{
+				"name": "Build",
+				"segment_type": "build",
+				"exit_actions": {
+					"default": {
+						"fetch_logs": true,
+						"notifications": [
+							{
+								"type": "slack",
+								"send_notification": true,
+								"to": [
+									"#gr-pipeline"
+								],
+								"message": "Segment Status"
+							}
+						],
+						"code_analysis": {
+							"publish": true,
+							"properties": null
+						},
+						"delete_instances": true
+					},
+					"on_success": {
+						"notifications": [
+							{
+								"type": "slack",
+								"send_notification": true,
+								"to": null,
+								"message": "Test message"
+							}
+						],
+						"code_analysis": null
+					},
+					"on_failure": {
+						"notifications": [
+							{
+								"type": "slack",
+								"send_notification": true,
+								"to": null,
+								"message": "Segment Failure"
+							}
+						],
+						"code_analysis": null
+					},
+					"on_abort": {
+						"notifications": [
+							{
+								"type": "slack",
+								"send_notification": true,
+								"to": null,
+								"message": "Segment Aborted"
+							}
+						],
+						"code_analysis": null
+					}
+				},
+				"properties": [
+					{
+						"name": "source_dirs",
+						"value": "sonar-project.properties",
+						"type": "string"
+					}
+				],
+				"deployment_strategy": {
+					"canary_watch_time": "",
+					"update_watch_time": "",
+					"serial": false
+				},
+				"application_init": {
+					"command": "",
+					"arguments": null
+				},
+				"packages": [
+					{
+						"name": "((application.name))",
+						"dependencies": [],
+						"downloads": [],
+						"files": [
+							"((application.name))*"
+						],
+						"package_install_command": "",
+						"installed_path": ""
+					},
+					{
+						"name": "hello-test",
+						"dependencies": [],
+						"downloads": [],
+						"files": [
+							"hello-world-dotnet.zip"
+						],
+						"package_install_command": "",
+						"installed_path": ""
+					}
+				],
+				"instance_tags": [
+					{
+						"name": "application.name",
+						"value": "((application.name))"
+					}
+				],
+				"post_deployment_actions": {
+					"instances": null,
+					"loadbalanced": false,
+					"loadbalancer": {
+						"TargetGroupName": "",
+						"TargetGroupPort": 0,
+						"TargetGroupProtocol": "",
+						"TargetType": "",
+						"VPCID": "",
+						"HealthCheckEnabled": false,
+						"HealthCheckPort": "",
+						"UnhealthyThresholdCount": 0
+					}
+				},
+				"cache_info": {},
+				"tasks": [
+					{
+						"name": "hello-world-dotnet",
+						"steps": [
+							{
+								"name": "List ALL variables",
+								"definition": "List ALL variables",
+								"command": "Get-Variable | Out-String",
+								"properties": null
+							},
+							{
+								"name": "Install dependencies",
+								"definition": "Install dependencies",
+								"command": "nuget restore",
+								"properties": null
+							},
+							{
+								"name": "Build",
+								"definition": "Build",
+								"command": "msbuild /t:Rebuild /p:Configuration=Debug",
+								"properties": null
+							},
+							{
+								"name": "Package",
+								"definition": "Package",
+								"command": ".\\package.ps1 ",
+								"properties": null
+							},
+							{
+								"name": "List files",
+								"definition": "List files",
+								"command": "dir\n\n\necho hello",
+								"properties": null
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "Isolation",
+				"segment_type": "isolation",
+				"run_after": [
+					"Build"
+				],
+				"job_steps": [
+					{
+						"name": "Env",
+						"definition": "Env",
+						"command": "Get-ChildItem Env:\n",
+						"properties": null
+					},
+					{
+						"name": "Test",
+						"definition": "Test",
+						"command": "ci/isolation_tests.ps1",
+						"properties": null
+					}
+				],
+				"exit_actions": {
+					"default": {
+						"fetch_logs": true,
+						"notifications": [
+							{
+								"type": "slack",
+								"send_notification": true,
+								"to": [
+									"#gr-pipeline"
+								],
+								"message": "Segment Status"
+							}
+						],
+						"code_analysis": {
+							"publish": false,
+							"properties": null
+						},
+						"delete_instances": true
+					},
+					"on_success": {
+						"notifications": [
+							{
+								"type": "slack",
+								"send_notification": true,
+								"to": null,
+								"message": "Test message"
+							}
+						],
+						"code_analysis": {
+							"publish": false,
+							"properties": null
+						},
+						"delete_instances": false
+					},
+					"on_failure": {
+						"notifications": [
+							{
+								"type": "slack",
+								"send_notification": true,
+								"to": null,
+								"message": "Segment Failure"
+							}
+						],
+						"code_analysis": {
+							"publish": false,
+							"properties": null
+						},
+						"delete_instances": false
+					},
+					"on_abort": {
+						"notifications": [
+							{
+								"type": "slack",
+								"send_notification": true,
+								"to": null,
+								"message": "Segment Aborted"
+							}
+						],
+						"code_analysis": {
+							"publish": false,
+							"properties": null
+						}
+					}
+				},
+				"deployment_files": [
+					{
+						"source_path": "ci/deploy.ps1",
+						"target_path": "ci/deploy.ps1"
+					}
+				],
+				"deployment_strategy": {
+					"canaries": 1,
+					"max_in_flight": 1,
+					"canary_watch_time": "120000-300000",
+					"update_watch_time": "120000-300000",
+					"serial": false
+				},
+				"application_init": {
+					"command": "",
+					"arguments": []
+				},
+				"package_dependencies": [
+					"((application.name))",
+					"hello-test"
+				],
+				"instance_tags": [
+					{
+						"name": "application.name",
+						"value": "((application.name))"
+					}
+				],
+				"instance_groups": [
+					{
+						"name": "((application.name))",
+						"number_of_instances": 1,
+						"persistent_disk_type": "",
+						"cloud_provider_name": "guide-rails-aws-us-west-2",
+						"vm_type": "default",
+						"os_type": "windows2012R2",
+						"networks": [
+							"isolation"
+						],
+						"availability_zones": null,
+						"deployment_strategy": {},
+						"dependencies": [
+							{
+								"name": "enable_ssh",
+								"release": "windows-utilities",
+								"properties": []
+							},
+							{
+								"name": "bosh-dns-windows",
+								"release": "bosh-dns-windows",
+								"properties": [
+									{
+										"name": "address",
+										"value": "((consul.joinservers))"
+									}
+								]
+							},
+							{
+								"name": "gr-utilities-windows",
+								"release": "gr-utilities-windows",
+								"properties": []
+							}
+						]
+					}
+				],
+				"post_deployment_actions": {
+					"instances": null,
+					"loadbalanced": false,
+					"loadbalancer": {
+						"TargetGroupName": "",
+						"TargetGroupPort": 0,
+						"TargetGroupProtocol": "",
+						"TargetType": "",
+						"VPCID": "",
+						"HealthCheckEnabled": false,
+						"HealthCheckPort": "",
+						"UnhealthyThresholdCount": 0
+					}
+				},
+				"cache_info": {}
+			}
+		],
+		"exit_actions": {
+			"default": {
+				"fetch_logs": true,
+				"notifications": [
+					{
+						"type": "slack",
+						"send_notification": true,
+						"to": [
+							"#gr-pipeline"
+						],
+						"message": "Segment Status"
+					}
+				],
+				"code_analysis": {
+					"publish": true,
+					"properties": null
+				},
+				"delete_instances": false
+			},
+			"on_success": {
+				"notifications": [
+					{
+						"type": "slack",
+						"send_notification": true,
+						"to": null,
+						"message": "Test message"
+					}
+				],
+				"code_analysis": {
+					"publish": false,
+					"properties": null
+				},
+				"delete_instances": false
+			},
+			"on_failure": {
+				"notifications": [
+					{
+						"type": "slack",
+						"send_notification": true,
+						"to": null,
+						"message": "Segment Failure"
+					}
+				],
+				"code_analysis": {
+					"publish": false,
+					"properties": null
+				},
+				"delete_instances": false
+			},
+			"on_abort": {
+				"notifications": [
+					{
+						"type": "slack",
+						"send_notification": true,
+						"to": null,
+						"message": "Segment Aborted"
+					}
+				],
+				"code_analysis": {
+					"publish": false,
+					"properties": null
+				}
+			}
+		},
+		"default_properties": [
+			{
+				"name": "additional_properties_file",
+				"value": "sonar-project.properties",
+				"type": "string"
+			}
+		],
+		"deployment_files": [
+			{
+				"source_path": "ci/deploy.ps1",
+				"target_path": "ci/deploy.ps1"
+			},
+			{
+				"source_path": "ci/isolation_tests.ps1",
+				"target_path": "ci/isolation_tests.ps1"
+			}
+		],
+		"application_init": {
+			"command": "",
+			"arguments": null
+		},
+		"process": {
+			"init": {
+				"command": "ci/deploy.ps1"
+			}
+		},
+		"releases": [
+			{
+				"name": "windows-utilities",
+				"version": "latest"
+			},
+			{
+				"name": "bosh-dns-windows",
+				"version": "latest"
+			},
+			{
+				"name": "gr-utilities-windows",
+				"version": "latest"
+			}
+		]
+	},
+	"organization": {
+		"orgname": "Onboarding-Demo"
+	},
+	"infrastructure": {
+		"stemcells": null,
+		"resources": [
+			{
+				"name": "pipeline",
+				"image": {
+					"name": "docker-registry.service.consul:443/pipeline-image-cli-test",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "email",
+				"image": {
+					"name": "docker-registry.service.consul:443/gr-email-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "deployment",
+				"image": {
+					"name": "docker-registry.service.consul:443/pipeline-image-cli-test",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "idgenerator",
+				"image": {
+					"name": "docker-registry.service.consul:443/gr-id-generator",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "emitter",
+				"image": {
+					"name": "docker-registry.service.consul:443/guide-rails-emitter",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "git-resource",
+				"image": {
+					"name": "docker-registry.service.consul:443/gr-git-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "build-breaker",
+				"image": {
+					"name": "docker-registry.service.consul:443/gr-build-breaker",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "s3",
+				"image": {
+					"name": "docker-registry.service.consul:443/concourse-s3-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "slack",
+				"image": {
+					"name": "docker-registry.service.consul:443/concourse-slack-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "sonar",
+				"image": {
+					"name": "docker-registry.service.consul:443/concourse-sonarqube-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "time",
+				"image": {
+					"name": "docker-registry.service.consul:443/gr-time-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "azure-blobstore",
+				"image": {
+					"name": "docker-registry.service.consul:443/concourse-azure-blobstore-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "gr-gcs-resource",
+				"image": {
+					"name": "docker-registry.service.consul:443/gr-gcs-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			}
+		],
+		"notification_configurations": [
+			{
+				"name": "email",
+				"provider": "email",
+				"URL": "",
+				"properties": [
+					{
+						"name": "gr_email_host",
+						"value": "((gr_email_host))"
+					},
+					{
+						"name": "gr_email_port",
+						"value": "((gr_email_port))"
+					},
+					{
+						"name": "gr_email_from",
+						"value": "((gr_email_from))"
+					},
+					{
+						"name": "gr_email_username",
+						"value": "((gr_email_username))"
+					},
+					{
+						"name": "gr_email_password",
+						"value": "((gr_email_password))"
+					}
+				]
+			}
+		],
+		"vault": {
+			"address": ""
+		},
+		"concourse": {
+			"address": "",
+			"team": "",
+			"username": "",
+			"password": "",
+			"fly_target_path": ""
+		},
+		"mq": {
+			"host": "",
+			"user": "",
+			"password": ""
+		},
+		"bosh": {
+			"director": ""
+		}
+	}
+}

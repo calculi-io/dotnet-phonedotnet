@@ -1,0 +1,13 @@
+.git/
+.gradle/
+.nuget/
+.sonarqube/
+bin/
+build/
+log-file.txt
+obj/
+webpackage/
+packages/
+opencover.xml
+testresults.xml
+hello-world-dotnet.zip

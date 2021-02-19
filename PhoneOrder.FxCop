@@ -1,0 +1,667 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FxCopProject Version="10.0" Name="My FxCop Project">
+ <ProjectOptions>
+  <SharedProject>True</SharedProject>
+  <Stylesheet Apply="False">$(FxCopDir)\Xml\FxCopReport.xsl</Stylesheet>
+  <SaveMessages>
+   <Project Status="Active, Excluded, Good, Noise" NewOnly="False" />
+   <Report Status="Active, Good, Noise" NewOnly="False" />
+  </SaveMessages>
+  <ProjectFile Compress="True" DefaultTargetCheck="True" DefaultRuleCheck="True" SaveByRuleGroup="" Deterministic="True" />
+  <EnableMultithreadedLoad>True</EnableMultithreadedLoad>
+  <EnableMultithreadedAnalysis>True</EnableMultithreadedAnalysis>
+  <SourceLookup>True</SourceLookup>
+  <AnalysisExceptionsThreshold>10</AnalysisExceptionsThreshold>
+  <RuleExceptionsThreshold>1</RuleExceptionsThreshold>
+  <Spelling Locale="en-US" />
+  <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
+  <CustomDictionaries SearchFxCopDir="True" SearchUserProfile="True" SearchProjectDir="True" />
+  <SearchGlobalAssemblyCache>False</SearchGlobalAssemblyCache>
+  <DeadlockDetectionTimeout>120</DeadlockDetectionTimeout>
+  <IgnoreGeneratedCode>False</IgnoreGeneratedCode>
+ </ProjectOptions>
+ <Targets>
+  <AssemblyReferenceDirectories>
+   <Directory>$(ProjectDir)/phoneorder/build/</Directory>
+  </AssemblyReferenceDirectories>
+  <Target Name="$(ProjectDir)/build/PhoneOrder.dll" Analyze="True" AnalyzeAllChildren="False">
+   <Modules AnalyzeAllChildren="False">
+    <Module Name="phoneorder.dll" Analyze="True" AnalyzeAllChildren="False">
+     <Namespaces AnalyzeAllChildren="False">
+      <Namespace Name="" Analyze="True" AnalyzeAllChildren="False">
+       <Types AnalyzeAllChildren="False" />
+      </Namespace>
+      <Namespace Name="PhoneOrder" Analyze="True" AnalyzeAllChildren="True" />
+      <Namespace Name="PhoneOrder.DTO" Analyze="True" AnalyzeAllChildren="True" />
+      <Namespace Name="PhoneOrder.Endpoints" Analyze="True" AnalyzeAllChildren="True" />
+      <Namespace Name="PhoneOrder.Entities" Analyze="True" AnalyzeAllChildren="True" />
+      <Namespace Name="PhoneOrder.Repositories" Analyze="True" AnalyzeAllChildren="True" />
+      <Namespace Name="PhoneOrder.Services" Analyze="True" AnalyzeAllChildren="False">
+       <Types AnalyzeAllChildren="False">
+        <Type Name="PhoneOrderService" Analyze="True" AnalyzeAllChildren="False">
+         <Members AnalyzeAllChildren="False">
+          <Member Name="#.cctor()" Analyze="True" />
+          <Member Name="#.ctor()" Analyze="True" />
+          <Member Name="#CreateDefaultOrder()" Analyze="True" />
+          <Member Name="#CreatePhoneOrder(System.IO.Stream)" Analyze="True" />
+          <Member Name="#GetAllRecords()" Analyze="True" />
+          <Member Name="#getJsonFromBody(System.IO.Stream)" Analyze="True" />
+          <Member Name="#GetRecordCount()" Analyze="True" />
+          <Member Name="#logger" Analyze="True" />
+          <Member Name="#phoneOrderRepository" Analyze="True" />
+          <Member Name="#UpdateOrderStatus(System.IO.Stream)" Analyze="True" />
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="PhoneOrder.Tests" Analyze="True" AnalyzeAllChildren="False">
+       <Types AnalyzeAllChildren="False">
+        <Type Name="PhoneOrderEntityFactoryTests" Analyze="True" AnalyzeAllChildren="False">
+         <Members AnalyzeAllChildren="False">
+          <Member Name="#.ctor()" Analyze="True" />
+          <Member Name="#GenerateId()" Analyze="True" />
+          <Member Name="#GeneratePlacedOnDate()" Analyze="True" />
+          <Member Name="#GetInstance()" Analyze="True" />
+          <Member Name="#ReadFromJson()" Analyze="True" />
+          <Member Name="#Reset()" Analyze="True" />
+          <Member Name="#SetCity()" Analyze="True" />
+          <Member Name="#SetName()" Analyze="True" />
+          <Member Name="#SetOrderStatus()" Analyze="True" />
+          <Member Name="#SetPhoneNumber()" Analyze="True" />
+          <Member Name="#SetPlacedOnDate()" Analyze="True" />
+          <Member Name="#SetStreet()" Analyze="True" />
+         </Members>
+        </Type>
+        <Type Name="PhoneOrderEntityTests" Analyze="True" AnalyzeAllChildren="False">
+         <Members AnalyzeAllChildren="False">
+          <Member Name="#.ctor()" Analyze="True" />
+          <Member Name="#City()" Analyze="True" />
+          <Member Name="#FirstName()" Analyze="True" />
+          <Member Name="#Id()" Analyze="True" />
+          <Member Name="#LastName()" Analyze="True" />
+          <Member Name="#Phone()" Analyze="True" />
+          <Member Name="#PlacedOn()" Analyze="True" />
+          <Member Name="#Status()" Analyze="True" />
+          <Member Name="#Street()" Analyze="True" />
+         </Members>
+        </Type>
+        <Type Name="PhoneOrderRepositoryTests" Analyze="True" AnalyzeAllChildren="True" />
+        <Type Name="PhoneOrderServiceTests" Analyze="True" AnalyzeAllChildren="False">
+         <Members AnalyzeAllChildren="False">
+          <Member Name="#.ctor()" Analyze="True" />
+          <Member Name="#Dispose()" Analyze="True" />
+          <Member Name="#GetRecordCount()" Analyze="True" />
+          <Member Name="#mockFactory" Analyze="True" />
+         </Members>
+        </Type>
+        <Type Name="WhiteBox" Analyze="True" AnalyzeAllChildren="True" />
+       </Types>
+      </Namespace>
+     </Namespaces>
+     <Resources AnalyzeAllChildren="True" />
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <RuleFiles>
+   <RuleFile Name="$(FxCopDir)\Rules\DesignRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\GlobalizationRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\InteroperabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\MobilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\NamingRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PerformanceRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PortabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityTransparencyRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\UsageRules.dll" Enabled="True" AllRulesEnabled="True" />
+  </RuleFiles>
+  <Groups />
+  <Settings />
+ </Rules>
+ <FxCopReport Version="10.0">
+  <Namespaces>
+   <Namespace Name="PhoneOrder">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Created="2016-09-08 19:33:46Z">
+      <Issue>
+       <Item>PhoneOrder</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="PhoneOrder.DTO">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Created="2016-09-08 19:33:46Z">
+      <Issue>
+       <Item>PhoneOrder.DTO</Item>
+      </Issue>
+     </Message>
+     <Message Id="DTO" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-08 19:33:46Z">
+      <Issue Name="Namespace">
+       <Item>DTO</Item>
+       <Item>PhoneOrder.DTO</Item>
+       <Item>Dto</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="PhoneOrder.Endpoints">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Created="2016-09-08 19:33:46Z">
+      <Issue>
+       <Item>PhoneOrder.Endpoints</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="PhoneOrder.Entities">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Created="2016-09-08 19:33:46Z">
+      <Issue>
+       <Item>PhoneOrder.Entities</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="PhoneOrder.Repositories">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Created="2016-09-08 19:33:46Z">
+      <Issue>
+       <Item>PhoneOrder.Repositories</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="PhoneOrder.Services">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Created="2016-09-09 15:39:27Z">
+      <Issue>
+       <Item>PhoneOrder.Services</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+  </Namespaces>
+  <Targets>
+   <Target Name="$(ProjectDir)/build/PhoneOrder.dll">
+    <Modules>
+     <Module Name="phoneorder.dll">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Created="2016-09-08 19:33:46Z">
+        <Issue Name="NoStrongName">
+         <Item>'PhoneOrder.dll'</Item>
+        </Issue>
+       </Message>
+       <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Created="2016-09-08 19:33:46Z">
+        <Issue>
+         <Item>'PhoneOrder.dll'</Item>
+        </Issue>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="PhoneOrder">
+        <Types>
+         <Type Name="Startup">
+          <Members>
+           <Member Name="#Configuration(Owin.IAppBuilder)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-08 19:33:46Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'Startup.Configuration(IAppBuilder)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="PhoneOrder.DTO">
+        <Types>
+         <Type Name="ChangeStatusRequestDTO">
+          <Messages>
+           <Message Id="DTO" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-08 19:33:46Z">
+            <Issue Name="Type">
+             <Item>DTO</Item>
+             <Item>'ChangeStatusRequestDTO'</Item>
+             <Item>Dto</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="ResponseDTO">
+          <Messages>
+           <Message Id="DTO" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-08 19:33:46Z">
+            <Issue Name="Type">
+             <Item>DTO</Item>
+             <Item>'ResponseDTO'</Item>
+             <Item>Dto</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#Orders">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2016-09-08 19:33:46Z">
+              <Issue>
+               <Item>'ResponseDTO.Orders'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2016-09-08 19:33:46Z">
+              <Issue>
+               <Item>'List&lt;PhoneOrderEntity&gt;'</Item>
+               <Item>'ResponseDTO.Orders'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="PhoneOrder.Endpoints">
+        <Types>
+         <Type Name="WebSite">
+          <Messages>
+           <Message Id="WebSite" TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702" Created="2016-09-08 19:33:46Z">
+            <Issue Name="TypeShouldBeDiscreteTerm">
+             <Item>WebSite</Item>
+             <Item>'WebSite'</Item>
+             <Item>Website</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="PhoneOrder.Entities">
+        <Types>
+         <Type Name="PhoneOrderEntity">
+          <Members>
+           <Member Name="#Zipcode">
+            <Messages>
+             <Message Id="Zipcode" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-08 19:33:46Z">
+              <Issue Name="Member">
+               <Item>Zipcode</Item>
+               <Item>'PhoneOrderEntity.Zipcode'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="PhoneOrderEntity+ApprovalStatus">
+          <Messages>
+           <Message TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034" Created="2016-09-08 19:33:46Z">
+            <Issue>
+             <Item>'PhoneOrderEntity.ApprovalStatus'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="PhoneOrderEntityFactory">
+          <Members>
+           <Member Name="#GetInstance()">
+            <Messages>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Created="2016-09-08 23:05:25Z">
+              <Issue Certainty="50">
+               <Item>'PhoneOrderEntityFactory.GetInstance()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetZipcode(System.UInt32)">
+            <Messages>
+             <Message Id="Zipcode" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-08 23:05:25Z">
+              <Issue Name="Member">
+               <Item>Zipcode</Item>
+               <Item>'PhoneOrderEntityFactory.SetZipcode(uint)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="zipcode" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-08 23:05:25Z">
+              <Issue Name="MemberParameter">
+               <Item>'PhoneOrderEntityFactory.SetZipcode(uint)'</Item>
+               <Item>zipcode</Item>
+               <Item>'zipcode'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="PhoneOrder.Repositories">
+        <Types>
+         <Type Name="PhoneOrderRepository">
+          <Members>
+           <Member Name="#GetOrderList()">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2016-09-08 19:33:46Z">
+              <Issue>
+               <Item>'List&lt;PhoneOrderEntity&gt;'</Item>
+               <Item>'PhoneOrderRepository.GetOrderList()'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Created="2016-09-08 19:33:46Z">
+              <Issue Certainty="50">
+               <Item>'PhoneOrderRepository.GetOrderList()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetRecordCount()">
+            <Messages>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Created="2016-09-08 19:33:46Z">
+              <Issue Certainty="50">
+               <Item>'PhoneOrderRepository.GetRecordCount()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#PhoneOrders">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-12 23:14:24Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderRepository.PhoneOrders'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="PhoneOrder.Services">
+        <Types>
+         <Type Name="PhoneOrderService">
+          <Members>
+           <Member Name="#GetAllRecords()">
+            <Messages>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Created="2016-09-09 15:39:27Z">
+              <Issue Certainty="50">
+               <Item>'PhoneOrderService.GetAllRecords()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#getJsonFromBody(System.IO.Stream)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:20:54Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'PhoneOrderService.getJsonFromBody(Stream)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetRecordCount()">
+            <Messages>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Created="2016-09-09 15:39:27Z">
+              <Issue Certainty="50">
+               <Item>'PhoneOrderService.GetRecordCount()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#logger">
+            <Messages>
+             <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Created="2016-09-09 18:20:54Z">
+              <Issue>
+               <Item>'PhoneOrderService.logger'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="PhoneOrder.Tests">
+        <Types>
+         <Type Name="PhoneOrderEntityFactoryTests">
+          <Members>
+           <Member Name="#GenerateId()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityFactoryTests.GenerateId()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GeneratePlacedOnDate()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityFactoryTests.GeneratePlacedOnDate()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetInstance()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityFactoryTests.GetInstance()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ReadFromJson()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityFactoryTests.ReadFromJson()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Reset()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityFactoryTests.Reset()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetCity()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityFactoryTests.SetCity()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetName()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityFactoryTests.SetName()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetOrderStatus()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityFactoryTests.SetOrderStatus()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetPhoneNumber()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityFactoryTests.SetPhoneNumber()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetPlacedOnDate()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityFactoryTests.SetPlacedOnDate()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetStreet()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityFactoryTests.SetStreet()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="PhoneOrderEntityTests">
+          <Members>
+           <Member Name="#City()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityTests.City()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#FirstName()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityTests.FirstName()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Id()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityTests.Id()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#LastName()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityTests.LastName()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Phone()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityTests.Phone()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#PlacedOn()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityTests.PlacedOn()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Status()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityTests.Status()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Street()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-09 18:47:37Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'PhoneOrderEntityTests.Street()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="PhoneOrderRepositoryTests">
+          <Members>
+           <Member Name="#UpdateStatusFailureNotExist()">
+            <Messages>
+             <Message Id="rval" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2016-09-12 23:15:39Z">
+              <Issue>
+               <Item>'PhoneOrderRepositoryTests.UpdateStatusFailureNotExist()'</Item>
+               <Item>'rval'</Item>
+               <Item>'bool'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+  </Targets>
+  <Rules>
+   <Rule TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210">
+    <Resolution Name="NoStrongName">Sign {0} with a strong name key.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020">
+    <Resolution Name="Default">Consider merging the types defined in '{0}' with another namespace.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823">
+    <Resolution Name="Default">It appears that field {0} is never used or is only ever assigned to. Use this field or remove it.</Resolution>
+   </Rule>
+   <Rule TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227">
+    <Resolution Name="Default">Change {0} to be read-only by removing the property setter.</Resolution>
+   </Rule>
+   <Rule TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702">
+    <Resolution Name="TypeShouldBeDiscreteTerm">The compound word '{0}' in type name {1} exists as a discrete term. If your usage is intended to be single word, case it as '{2}'.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002">
+    <Resolution Name="Default">Change {0} in {1} to use Collection&lt;T&gt;, ReadOnlyCollection&lt;T&gt; or KeyedCollection&lt;K,V&gt;</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709">
+    <Resolution Name="Namespace">Correct the casing of '{0}' in namespace name '{1}' by changing it to '{2}'.</Resolution>
+    <Resolution Name="Type">Correct the casing of '{0}' in type name {1} by changing it to '{2}'.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704">
+    <Resolution Name="Member">Correct the spelling of '{0}' in member name {1} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+    <Resolution Name="MemberParameter">In method {0}, correct the spelling of '{1}' in parameter name {2} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014">
+    <Resolution Name="Default">Mark {0} with CLSCompliant(true) because it exposes externally visible types.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822">
+    <Resolution Name="Default">The 'this' parameter (or 'Me' in Visual Basic) of {0} is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Resolution>
+   </Rule>
+   <Rule TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034">
+    <Resolution Name="Default">Do not nest type {0}. Alternatively, change its accessibility so that it is not externally visible.</Resolution>
+   </Rule>
+   <Rule TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804">
+    <Resolution Name="Default">{0} declares a variable, {1}, of type {2}, which is never used or is only assigned to. Use this variable or remove it.</Resolution>
+   </Rule>
+   <Rule TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024">
+    <Resolution Name="Default">Change {0} to a property if appropriate.</Resolution>
+   </Rule>
+  </Rules>
+ </FxCopReport>
+</FxCopProject>

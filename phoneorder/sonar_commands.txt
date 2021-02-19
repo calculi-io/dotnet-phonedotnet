@@ -1,0 +1,15 @@
+SonarScanner.MSBuild begin /key:Phoneorder-Build-master /d:sonar.host.url=http://0.0.0.0:port /d:sonar.cs.opencover.reportsPaths="./opencover.xml" /d:sonar.cs.nunit.reportsPaths="./testresults.xml"
+
+MSBuild /t:Rebuild
+
+can skip below
+.\packages\Nunit.ConsoleRunner.3.9.0\tools\nunit3-console.exe phoneorder/bin/PhoneOrder.dll "--result:testresults.xml;format=nunit3"
+
+
+.\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -filter:+[PhoneOrder]*-[PhoneOrder]PhoneOrder.Tests.* -target:.\packages\Nunit.ConsoleRunner.3.9.0\tools\nunit3-console.exe "-targetargs:phoneorder/bin/PhoneOrder.dll --result:testresults.xml;format=nunit3" "-output:opencover.xml"
+
+SonarScanner.MSBuild end
+
+
+ following line works with sonar
+.\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:Path64 -filter:+[PhoneOrder]*-[PhoneOrder]PhoneOrder.Tests.* -target:.\packages\Nunit.ConsoleRunner.3.9.0\tools\nunit3-console.exe "-targetargs:phoneorder/bin/PhoneOrder.dll --result:testresults.xml;format=nunit3" "-output:opencover.xml" -searchdirs:phoneorder/obj/Debug

@@ -1,0 +1,93 @@
+apply plugin: 'com.ullink.msbuild'
+
+buildscript {
+	dependencies {
+		classpath "com.ullink.gradle:gradle-msbuild-plugin:+"
+	}
+	repositories {
+		jcenter()
+	}
+}
+
+defaultTasks 'clean', 'msbuild', 'codeCheck', 'testreport', 'coveragereport'
+
+msbuild {
+	solutionFile = "${build_solution_file}"
+    targets = ['Clean', 'Rebuild']
+    destinationDir = "${build_destination_directory}"
+    intermediateDir = "${build_obj_directory}"
+    configuration = "${build_configuration}"
+	defineConstants = "${build_defines}".tokenize(';')
+}
+
+assemblyInfoPatcher {
+	description 'Patches assemblies with publish version'
+    version = "${publish_major_version}.${publish_minor_version}.${publish_revision_version}.${publish_build_version}"
+    fileVersion = version
+	projects = "${assembly_projects}".tokenize(';')
+}
+
+task codeCheck(type: Exec) {
+	description 'Runs FxCop on the project'
+	commandLine "${fxcop_executable}", '/p:' + "${fxcop_configuration_file}", '/s', "/o:${build_destination_directory}\\${fxcop_report_file}"
+}
+
+task nugetRestore (type: Exec) {
+	description = 'restores NuGet packages to package directory'
+    workingDir = "${projectDir}"
+    
+    commandLine "${nuget_executable}", 'restore'
+}
+
+task runtests(type: Exec) {
+	description = 'Runs unit tests'
+	String executable = "${projectDir}\\packages\\${test_package_install_directory}\\tools\\nunit3-console.exe"
+
+	workingDir = "${build_destination_directory}"
+	setIgnoreExitValue(true)
+
+	commandLine executable, "${test_assembly}", "--result:${test_results_file};format=nunit3"
+}
+
+task testreport(type: Exec) {
+	description = 'generates unit test report in html format'
+	String executable = "${projectDir}\\packages\\${test_report_package_install_directory}\\tools\\ReportUnit.exe"
+	String input = "${test_results_file}"
+	String output = "${test_report_html_file}"
+	
+	workingDir = "${build_destination_directory}"
+	
+	commandLine executable, input, output	
+}
+
+task coverage(type: Exec) {
+	description = 'creates coverage data'
+	String executable = "${projectDir}\\packages\\${coverage_package_install_directory}\\tools\\OpenCover.Console.exe"
+	String arguments = "-register:user"
+	String assemblies = "-filter:${coverage_filter}"
+	String target = "-target:${projectDir}\\packages\\${test_package_install_directory}\\tools\\nunit3-console.exe"
+	String targetargs = "\"-targetargs:${test_assembly} --noresult\""
+	String results = "\"-output:${coverage_result_file}\""
+	
+	workingDir = "${build_destination_directory}"
+	
+	commandLine executable, arguments, assemblies, target, targetargs, results
+}
+
+task coveragereport(type: Exec) {
+	description = 'creates html coverage report'
+	String executable = "${projectDir}\\packages\\${coverage_report_package_install_directory}\\tools\\net47\\reportgenerator.exe"
+	String reports = "-reports:${coverage_result_file}"
+	String targetdir = "-targetdir:${coverage_report_directory}"
+	
+	workingDir = "${build_destination_directory}"
+	
+	commandLine executable, reports, targetdir
+}
+
+msbuild.dependsOn nugetRestore
+codeCheck.dependsOn msbuild
+runtests.dependsOn msbuild
+testreport.dependsOn runtests
+coverage.dependsOn msbuild
+coveragereport.dependsOn coverage
