@@ -108,7 +108,7 @@
 							{
 								"name": "List files",
 								"definition": "List files",
-								"command": "dir\n\n\necho hello",
+								"command": "dir\nls\n\n\necho hello",
 								"properties": null
 							}
 						]
@@ -211,7 +211,17 @@
 						]
 					}
 				],
-				"deployment_target": 1
+				"deployment_target": 1,
+				"releases": [
+					{
+						"name": "bosh-dns-windows",
+						"version": "latest"
+					},
+					{
+						"name": "gr-utilities-windows",
+						"version": "latest"
+					}
+				]
 			}
 		],
 		"exit_actions": {
@@ -246,17 +256,7 @@
 			"init": {
 				"command": "ci/deploy.ps1"
 			}
-		},
-		"releases": [
-			{
-				"name": "bosh-dns-windows",
-				"version": "latest"
-			},
-			{
-				"name": "gr-utilities-windows",
-				"version": "latest"
-			}
-		]
+		}
 	},
 	"organization": {
 		"orgname": "Onboarding-Demo"
